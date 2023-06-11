@@ -4,7 +4,7 @@
 
 ## Features
 
-- **Search for GIFs**: Enter your desired search query and click the "Search" button to retrieve relevant GIF images.
+- **Search for GIFs**: Relevant GIF images will be retrieved and displayed for you to explore.
 - **Dynamic Display**: The GIF images will be displayed on the page in a grid layout, providing an organized and visually pleasing browsing experience.
 - **Instant Results**: The results will be loaded and displayed on the page in real-time, allowing you to see the GIFs without any delay.
 - **Responsive Design**: The website is designed to be responsive and can adapt to different screen sizes, ensuring a seamless experience across devices.
