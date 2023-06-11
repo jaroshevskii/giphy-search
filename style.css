@@ -1,0 +1,35 @@
+body {
+	max-width: 768px;
+	margin-inline: auto;
+	margin-block: 0px;
+	padding-inline: 16px;
+	padding-top: 64px;
+	padding-bottom: 128px;
+}
+
+h1 {
+	text-align: center;
+}
+
+.search {
+	display: flex;
+	max-width: 512px;
+	margin-inline: auto;
+	margin-block: 32px;
+}
+
+.search>.search-button {
+	margin-left: 6px;
+	min-width: auto;
+}
+
+#gifContainer {
+	display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 10px;
+}
+
+#gifContainer>img {
+	width: 100%;
+	border-radius: var(--rounded-lg);
+}

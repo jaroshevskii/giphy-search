@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/dracula-ui@1.0.3/styles/dracula-ui.css" />
+  <link rel="stylesheet" href="style.css">
+  <title>GIPHY Search</title>
+</head>
+
+<body class="drac-bg-black">
+  <h1 class="drac-heading drac-heading-2xl drac-text-white">GIPHY Search</h1>
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Type here and let the GIF magic unfold!"
+      class="drac-input drac-input-sm drac-input-border-sm drac-input-pink drac-text-pink">
+    <button onclick="searchGIFs()" class="drac-btn drac-btn-sm drac-bg-pink search-button">Search</button>
+  </div>
+
+  <div id="gifContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
