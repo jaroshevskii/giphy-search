@@ -1,54 +1,67 @@
-var offset = 0; // Variable to track the offset for retrieving new GIFs.
-var isLoading = false; // Variable to track if data is currently being loaded.
+const apiKey = "ejiQdEnDapCsfuCg97zET8hR7ZbgEr7B";
+let offset = 0;
+let isLoading = false;
 
-function searchGIFs() {
-  var searchQuery = document.getElementById("searchInput").value;
-  var apiKey = "ejiQdEnDapCsfuCg97zET8hR7ZbgEr7B";
-  var url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchQuery}&offset=${offset}`;
+// Function to fetch GIFs from the GIPHY API
+function fetchGIFs(searchQuery) {
+  const url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchQuery}&offset=${offset}`;
 
-  var gifContainer = document.getElementById("gifContainer");
-
-  if (offset === 0) {
-    gifContainer.innerHTML = ""; // Clear previous search results only when starting a new search.
-  }
-
-  fetch(url)
+  return fetch(url)
     .then(response => response.json())
     .then(data => {
-      data.data.forEach(gif => {
-        var gifImage = document.createElement("img");
-        gifImage.src = gif.images.fixed_height.url;
-        gifContainer.appendChild(gifImage);
-      });
+      offset += data.data.length;
+      return data.data;
+    });
+}
 
-      offset += data.data.length; // Increase the offset by the number of retrieved GIFs.
-      isLoading = false; // Reset isLoading flag.
+// Function to display the fetched GIFs in the GIF container
+function displayGIFs(gifs) {
+  const gifContainer = document.getElementById("gifContainer");
+  gifs.forEach(gif => {
+    const gifImage = document.createElement("img");
+    gifImage.src = gif.images.fixed_height.url;
+    gifContainer.appendChild(gifImage);
+  });
+}
+
+// Function to handle the search for GIFs
+function searchGIFs() {
+  const searchQuery = document.getElementById("searchInput").value.trim();
+  if (!searchQuery) return; // Exit if search query is empty
+
+  offset = 0; // Reset offset for new search
+  isLoading = true;
+  const gifContainer = document.getElementById("gifContainer");
+  gifContainer.innerHTML = ""; // Clear previous search results.
+
+  fetchGIFs(searchQuery)
+    .then(gifs => {
+      displayGIFs(gifs);
+      isLoading = false;
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+      console.error(error);
+      isLoading = false;
+    });
 }
 
 // Keypress event listener on the search input field
-document.getElementById("searchInput").addEventListener("keypress", function (event) {
+document.getElementById("searchInput").addEventListener("keypress", function(event) {
   if (event.key === "Enter") {
-    offset = 0; // Reset the offset when performing a new search.
-    searchGIFs(); // Call the searchGIFs function on pressing the Enter key.
-    event.preventDefault(); // Prevent the default form behavior.
+    event.preventDefault();
+    searchGIFs();
   }
 });
 
 // Scroll event listener.
-window.addEventListener("scroll", function () {
-  // Check if scrolled to the bottom of the page and data is not currently being loaded.
+window.addEventListener("scroll", function() {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight && !isLoading) {
-    isLoading = true; // Set the isLoading flag to true to prevent multiple requests at the same time.
-    searchGIFs(); // Call the searchGIFs function when scrolled to the bottom of the page.
+    isLoading = true;
+    searchGIFs();
   }
 });
 
 // Click event listener on the search button
-document.getElementById("searchButton").addEventListener("click", function () {
-  offset = 0; // Reset the offset when performing a new search.
-  var gifContainer = document.getElementById("gifContainer");
-  gifContainer.innerHTML = "";
-  searchGIFs(); // Call the searchGIFs function on clicking the search button.
+document.getElementById("searchButton").addEventListener("click", function() {
+  searchGIFs();
 });
