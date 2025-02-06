@@ -1,3 +1,5 @@
+<img width="1324" alt="image" src="https://github.com/user-attachments/assets/8e6713b8-a752-44b5-9479-18d7207d36b2" />
+
 # GIPHY Search
 
 [GIPHY Search](https://jaroshevskii.github.io/giphy-search/) is a website that lets you search and explore GIF images using the [GIPHY API](https://developers.giphy.com/).
